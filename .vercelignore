@@ -13,8 +13,9 @@ docs/*
 !docs/evaluation-method.md
 !docs/research-plan.md
 !docs/deployment-guide.md
-eval/*
-!eval/results/
+eval/*.js
+eval/*.json
+eval/*.jsonl
 eval/results/*
 !eval/results/rule-summary.json
 !eval/results/hybrid-summary.json
