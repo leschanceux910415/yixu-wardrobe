@@ -41,7 +41,7 @@ function updateWeatherHint(influence){
   if(manual)$('weather-override').textContent=`已手动填写 ${$('temperature').value}℃，将优先于天气气温；清空后按描述或天气判断。`;
   else if(influence?.temperatureSource==='manual')$('weather-override').textContent=`本次采用描述中的手动气温 ${weatherValue(influence.effectiveTemperature,'℃')}，优先于天气。`;
   else if(influence?.temperatureSource==='weather')$('weather-override').textContent=influence.note||`本次根据所选时段天气，以 ${weatherValue(influence.effectiveTemperature,'℃')} 作为搭配参考。`;
-  else $('weather-override').textContent=$('weather-enabled').checked?'天气只作为穿搭参考；也可以手动填写气温。':'已关闭天气参考，可以在下方手动填写气温。';
+  else $('weather-override').textContent=$('weather-enabled').checked?'结合所选时段天气搭配，也可手动填写气温。':'已关闭天气参考，可以在下方手动填写气温。';
 }
 function renderWeather(){
   const card=$('weather-card');card.classList.toggle('weather-error',!!state.weatherError);
@@ -210,7 +210,7 @@ $('confirm-worn').addEventListener('click',confirmWorn);
 $('add-item').addEventListener('click',()=>openEditor());$('close-dialog').addEventListener('click',()=>$('item-dialog').close());$('item-category').addEventListener('change',()=>updateSubtypes());$('item-form').addEventListener('submit',saveItem);
 $('delete-item').addEventListener('click',()=>{if(!allowMutation())return;const id=$('edit-id').value;state.items=state.items.filter(x=>x.id!==id);state.required.delete(id);state.excluded.delete(id);if(state.previous)state.previous={...state.previous,requiredIds:[...state.required],excludedIds:[...state.excluded]};invalidateResult('衣物已移除，请重新生成搭配。');persist();renderCloset();renderConditions();$('item-dialog').close();toast('已移除，旧搭配已失效。历史穿着记录保留。');});
 $('reset-demo').addEventListener('click',()=>{if(!allowMutation())return;if(!confirm('恢复示例衣橱将替换本机新增和修改的单品，穿着记录会保留。确定恢复吗？'))return;state.items=structuredClone(state.initial);state.previous=null;state.required.clear();state.excluded.clear();state.constraintsDirty=false;state.filter='all';document.querySelectorAll('[data-category]').forEach(x=>{x.classList.toggle('active',x.dataset.category==='all');x.setAttribute('aria-pressed',String(x.dataset.category==='all'));});invalidateResult('已恢复示例衣橱，请重新生成搭配。');persist();renderCloset();renderConditions();toast('已恢复示例，旧搭配失效，历史记录仍保留。');});
-$('export-records').addEventListener('click',()=>{const contents={exportedAt:new Date().toISOString(),dataVersion:state.dataVersion,notice:'当前浏览器本机记录；不可据此推断独立用户数或总体采纳率。衣橱为示例或本人手动录入。',wardrobe:state.items,archivedItems:state.archivedItems,...state.records};const blob=new Blob([JSON.stringify(contents,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`衣序本机试用记录-${dateKey()}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('已导出本机记录，不会上传后台。');});
+$('export-records').addEventListener('click',()=>{const contents={exportedAt:new Date().toISOString(),dataVersion:state.dataVersion,notice:'当前浏览器的搭配计划、实际穿着与操作记录；衣橱来源为示例数据或手动录入。',wardrobe:state.items,archivedItems:state.archivedItems,...state.records};const blob=new Blob([JSON.stringify(contents,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`衣序本机试用记录-${dateKey()}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('已导出本机衣橱与穿着记录。');});
 
 async function init(){
   renderRecords();setBusy(true);

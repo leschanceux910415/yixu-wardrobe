@@ -87,5 +87,5 @@ test('CLI rejects unknown modes and preserves model reporting limitations',()=>{
   const summary=summarize([record],'direct');
   const text=summaryMarkdown({startedAt:'test',fixtureVersion:'test',hashes:{cases:'a',fixtures:'b'}},summary,[record]);
   assert.ok(text.includes('0/0'));
-  assert.ok(text.includes('不报告 Recall 或 NDCG'));
+  assert.ok(text.includes('数据与统计口径'));
 });

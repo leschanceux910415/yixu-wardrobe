@@ -5,7 +5,7 @@
   "split": "development_regression",
   "separateFromOriginal37": true,
   "provenance": {
-    "description": "12条人工构造天气开发场景。天气数字、时钟与故障均为测试输入，不是真实天气或用户问题。当前是可机读测试规格，尚未声明已接入运行器。",
+    "description": "12条人工构造天气开发场景，使用固定天气、时钟与故障输入。当前交付为可机读测试规格，运行器接入与执行列入后续批次。",
     "weatherSourceKind": "synthetic_fixture",
     "wardrobeFixture": "eval/fixtures.json",
     "isHeldOut": false,
