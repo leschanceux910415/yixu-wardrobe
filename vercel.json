@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": "node scripts/prepare-public.js",
+  "outputDirectory": "public",
+  "functions": { "api/*.js": { "includeFiles": "{lib/**,data/wardrobe.json,eval/results/rule-summary.json,eval/results/hybrid-summary.json}" } },
+  "headers": [{ "source": "/(.*)", "headers": [
+    { "key":"X-Content-Type-Options", "value":"nosniff" },
+    { "key":"Referrer-Policy", "value":"same-origin" },
+    { "key":"Content-Security-Policy", "value":"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" }
+  ] }]
+}

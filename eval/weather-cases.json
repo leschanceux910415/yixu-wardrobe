@@ -1,0 +1,125 @@
+{
+  "version": "synthetic-weather-dev-v1",
+  "status": "draft_not_run",
+  "datasetKind": "manually_constructed_weather_development",
+  "split": "development_regression",
+  "separateFromOriginal37": true,
+  "provenance": {
+    "description": "12条人工构造天气开发场景。天气数字、时钟与故障均为测试输入，不是真实天气或用户问题。当前是可机读测试规格，尚未声明已接入运行器。",
+    "weatherSourceKind": "synthetic_fixture",
+    "wardrobeFixture": "eval/fixtures.json",
+    "isHeldOut": false,
+    "results": null
+  },
+  "clock": {"now": "2026-11-08T01:00:00.000Z", "timezone": "Asia/Shanghai"},
+  "weatherFixtures": {
+    "mildShanghai": {
+      "city": "shanghai", "date": "2026-11-08", "timezone": "Asia/Shanghai", "period": "commute",
+      "retrievedAt": "2026-11-08T00:50:00.000Z", "expiresAt": "2026-11-08T01:20:00.000Z",
+      "hours": [
+        {"time": "2026-11-08T08:00", "temperature": 17, "apparent": 16, "precipitationProbability": 10, "precipitation": 0, "windSpeed": 8},
+        {"time": "2026-11-08T09:00", "temperature": 19, "apparent": 18, "precipitationProbability": 10, "precipitation": 0, "windSpeed": 9},
+        {"time": "2026-11-08T18:00", "temperature": 15, "apparent": 13, "precipitationProbability": 20, "precipitation": 0, "windSpeed": 12},
+        {"time": "2026-11-08T19:00", "temperature": 14, "apparent": 12, "precipitationProbability": 20, "precipitation": 0, "windSpeed": 13}
+      ]
+    },
+    "coldShanghai": {
+      "city": "shanghai", "date": "2026-11-08", "timezone": "Asia/Shanghai", "period": "commute",
+      "retrievedAt": "2026-11-08T00:50:00.000Z", "expiresAt": "2026-11-08T01:20:00.000Z",
+      "hours": [
+        {"time": "2026-11-08T09:00", "temperature": 5, "apparent": 4, "precipitationProbability": 10, "precipitation": 0, "windSpeed": 8},
+        {"time": "2026-11-08T18:00", "temperature": 6, "apparent": 4, "precipitationProbability": 10, "precipitation": 0, "windSpeed": 9}
+      ]
+    },
+    "rainShanghai": {
+      "city": "shanghai", "date": "2026-11-08", "timezone": "Asia/Shanghai", "period": "commute",
+      "retrievedAt": "2026-11-08T00:50:00.000Z", "expiresAt": "2026-11-08T01:20:00.000Z",
+      "hours": [
+        {"time": "2026-11-08T09:00", "temperature": 14, "apparent": 12, "precipitationProbability": 80, "precipitation": 2, "windSpeed": 23},
+        {"time": "2026-11-08T18:00", "temperature": 12, "apparent": 10, "precipitationProbability": 90, "precipitation": 3, "windSpeed": 25}
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "W01", "stratum": "entry_cost", "query": "通勤，不穿裙子",
+      "trigger": "homepage_auto", "version": "rule", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai",
+      "expected": {"status": "ok", "mode": "rule", "modelCalls": 0, "constraints": {"bottomType": "trousers"}, "sourceVisible": true, "timestampVisible": true},
+      "note": "首页自动推荐只能取天气与规则，不触发模型。"
+    },
+    {
+      "id": "W02", "stratum": "weather_ai", "query": "通勤，怕冷，不穿裙子，保留白色衬衫",
+      "trigger": "explicit_weather_ai", "version": "weather", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai", "modelStub": "valid_candidate_selection",
+      "expected": {"status": "ok", "mode": "weather", "modelCalls": 1, "constraints": {"bottomType": "trousers", "requiredIds": ["T01"]}, "weatherFactsGrounded": true},
+      "note": "单次模型只重排同一合格候选池；不能因天气覆盖锁定或裙裤。"
+    },
+    {
+      "id": "W03", "stratum": "temperature_override", "query": "22度通勤",
+      "version": "rule", "overrides": {"temperature": 24}, "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "coldShanghai",
+      "expected": {"status": "ok", "mode": "rule", "modelCalls": 0, "effectiveTemperature": 24, "temperatureSource": "manual", "overrideExplained": true},
+      "note": "表单明确温度优先于描述和自动天气；天气预报仍照实展示。"
+    },
+    {
+      "id": "W04", "stratum": "date_timezone", "query": "明天通勤",
+      "version": "rule", "clockOverride": "2026-11-08T15:30:00.000Z", "weatherSelection": {"city": "shanghai", "day": "tomorrow", "period": "commute"},
+      "toolFixture": {"kind": "synthetic_hourly_response", "localDate": "2026-11-09", "timezone": "Asia/Shanghai", "temperature": 18, "apparent": 16},
+      "expected": {"status": "ok", "targetDate": "2026-11-09", "timezone": "Asia/Shanghai", "modelCalls": 0, "wrongDayHoursExcluded": true},
+      "note": "固定时钟为上海23:30；明天应按城市本地日期，不能按UTC日期偏移。"
+    },
+    {
+      "id": "W05", "stratum": "period_selection", "query": "通勤",
+      "version": "rule", "clockOverride": "2026-11-08T09:30:00.000Z", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai",
+      "expected": {"status": "ok", "modelCalls": 0, "selectedHoursInclude": ["2026-11-08T18:00", "2026-11-08T19:00"], "selectedHoursExclude": ["2026-11-08T08:00", "2026-11-08T09:00"], "remainingHours": true},
+      "note": "上海17:30仍有晚间通勤小时，只汇总剩余时段，不把早晨低温重复作为未来依据。"
+    },
+    {
+      "id": "W06", "stratum": "cache", "query": "通勤",
+      "version": "rule", "sequence": [
+        {"at": "2026-11-08T01:00:00.000Z", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}},
+        {"at": "2026-11-08T01:10:00.000Z", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}}
+      ], "weatherFixture": "mildShanghai", "toolFixture": {"kind": "count_network_calls"},
+      "expected": {"secondCacheStatus": "hit", "sameRetrievedAt": true, "networkWeatherCalls": 1, "modelCalls": 0},
+      "note": "同城市日期时段30分钟内复用缓存，显示原始时间，不伪造重新获取。"
+    },
+    {
+      "id": "W07", "stratum": "weather_failure", "query": "18度通勤",
+      "version": "rule", "clockOverride": "2026-11-08T02:00:00.000Z", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai", "toolFixture": {"kind": "expired_cache_then_timeout"},
+      "expected": {"status": "ok", "mode": "rule", "modelCalls": 0, "weatherStatus": "unavailable", "effectiveTemperature": 18, "temperatureSource": "manual", "noStaleAsFresh": true, "weatherFailureNotice": true},
+      "note": "过期缓存获取失败，不冒充实时天气；保留明确手动温度与可用规则。"
+    },
+    {
+      "id": "W08", "stratum": "model_failure", "query": "通勤，不穿裙子",
+      "version": "weather", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai", "modelStub": "timeout_after_call",
+      "expected": {"status": "ok", "mode": "rule", "modelCalls": 1, "fallbackRequired": true, "model": null, "constraints": {"bottomType": "trousers"}, "weatherFactsStillVisible": true},
+      "note": "模型超时后明确回规则；不能将一次失败调用计作模型成功，天气可单独保留。"
+    },
+    {
+      "id": "W09", "stratum": "unknown_properties", "query": "通勤，鞋子必须防水",
+      "version": "weather", "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "rainShanghai",
+      "expected": {"status": "clarify", "outfits": 0, "modelCalls": 0, "waterproofUnknownNotice": true, "noWaterproofSatisfiedClaim": true},
+      "note": "评测衣橱没有已确认防水属性；降雨与鞋名都不能代替属性证据。"
+    },
+    {
+      "id": "W10", "stratum": "multiturn_city", "query": "按更新后的条件搭配",
+      "version": "rule", "previous": {"scene": "formal", "temperature": null, "requiredIds": ["T01"], "excludedColors": ["黑"], "bottomType": "trousers"},
+      "sequence": [
+        {"weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}},
+        {"weatherSelection": {"city": "beijing", "day": "today", "period": "commute"}}
+      ], "toolFixture": {"kind": "city_specific_snapshots", "shanghaiApparent": 16, "beijingApparent": 6},
+      "expected": {"status": "ok", "modelCalls": 0, "latestWeatherCity": "beijing", "oldResultInvalidated": true, "request": {"scene": "formal", "requiredIds": ["T01"], "excludedColors": ["黑"], "bottomType": "trousers"}},
+      "note": "改城市只替换自动天气依据，不能复用上海结果或丢失用户禁穿条件。"
+    },
+    {
+      "id": "W11", "stratum": "soft_weather_tradeoff", "query": "正式场合",
+      "version": "weather", "wardrobeIds": ["T02", "B03", "S02"], "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "coldShanghai", "modelStub": "valid_candidate_selection",
+      "expected": {"status": "ok", "mode": "weather", "modelCalls": 1, "outfits": 1, "tradeoffNotice": true, "noForcedOuterwear": true},
+      "note": "保暖与正式度不足是软权衡；不能重现D28将可行衣橱阻断为必须补衣。"
+    },
+    {
+      "id": "W12", "stratum": "hard_conflict", "query": "通勤",
+      "version": "weather", "overrides": {"requiredIds": ["T01"], "excludedColors": ["白"]}, "weatherSelection": {"city": "shanghai", "day": "today", "period": "commute"}, "weatherFixture": "mildShanghai",
+      "expected": {"status": "conflict", "outfits": 0, "modelCalls": 0, "constraintsNotRelaxed": true, "diagnosisRequired": true},
+      "note": "天气或模型不得替用户解除锁定与禁止颜色冲突；无合格候选不调用重排。"
+    }
+  ]
+}

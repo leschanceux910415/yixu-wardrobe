@@ -1,0 +1,30 @@
+{
+  "version": "demo-2026-11-08-v1",
+  "provenance": {"kind": "synthetic_demo", "description": "24件人工构造的示例衣物。颜色、厚薄与正式度均为演示属性，不代表真实衣物、真实用户或专业穿衣标准。"},
+  "items": [
+    {"id":"T01","name":"白衬衫","category":"top","subtype":"shirt","color":"白","colorHex":"#f7f4ea","colorFamily":"neutral","warmth":2,"formality":4,"tags":["通勤","正式"],"source":"示例数据","confirmed":true},
+    {"id":"T02","name":"蓝衬衫","category":"top","subtype":"shirt","color":"浅蓝","colorHex":"#a8c3d8","colorFamily":"cool","warmth":2,"formality":4,"tags":["通勤","约会"],"source":"示例数据","confirmed":true},
+    {"id":"T03","name":"绿色针织衫","category":"top","subtype":"knit","color":"绿","colorHex":"#8c9978","colorFamily":"cool","warmth":4,"formality":3,"tags":["通勤","秋冬"],"source":"示例数据","confirmed":true},
+    {"id":"T04","name":"黑色T恤","category":"top","subtype":"tee","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":1,"formality":1,"tags":["休闲","运动"],"source":"示例数据","confirmed":true},
+    {"id":"T05","name":"米白针织衫","category":"top","subtype":"knit","color":"米白","colorHex":"#efe9d9","colorFamily":"neutral","warmth":3,"formality":3,"tags":["约会","通勤"],"source":"示例数据","confirmed":true},
+    {"id":"T06","name":"红色T恤","category":"top","subtype":"tee","color":"红","colorHex":"#ad5d51","colorFamily":"warm","warmth":1,"formality":1,"tags":["休闲","运动"],"source":"示例数据","confirmed":true},
+    {"id":"B01","name":"灰色西裤","category":"bottom","subtype":"trousers","color":"深灰","colorHex":"#6a6a66","colorFamily":"neutral","warmth":3,"formality":5,"tags":["通勤","正式"],"source":"示例数据","confirmed":true},
+    {"id":"B02","name":"蓝色牛仔裤","category":"bottom","subtype":"trousers","color":"牛仔蓝","colorHex":"#5b7a99","colorFamily":"cool","warmth":3,"formality":2,"tags":["休闲","约会"],"source":"示例数据","confirmed":true},
+    {"id":"B03","name":"黑色运动裤","category":"bottom","subtype":"trousers","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":2,"formality":1,"tags":["运动","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"B04","name":"卡其长裤","category":"bottom","subtype":"trousers","color":"卡其","colorHex":"#b9a582","colorFamily":"warm","warmth":2,"formality":3,"tags":["通勤","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"B05","name":"黑色半身裙","category":"bottom","subtype":"skirt","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":2,"formality":4,"tags":["正式","约会"],"source":"示例数据","confirmed":true},
+    {"id":"B06","name":"米色长裙","category":"bottom","subtype":"skirt","color":"米色","colorHex":"#e2d3ba","colorFamily":"neutral","warmth":2,"formality":3,"tags":["约会","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"O01","name":"黑色西装外套","category":"outer","subtype":"blazer","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":3,"formality":5,"tags":["正式","通勤"],"source":"示例数据","confirmed":true},
+    {"id":"O02","name":"棕色厚外套","category":"outer","subtype":"coat","color":"棕","colorHex":"#7b5b43","colorFamily":"warm","warmth":5,"formality":3,"tags":["秋冬","通勤"],"source":"示例数据","confirmed":true},
+    {"id":"O03","name":"灰色薄外套","category":"outer","subtype":"coat","color":"浅灰","colorHex":"#c9c9c4","colorFamily":"neutral","warmth":2,"formality":2,"tags":["休闲","春秋"],"source":"示例数据","confirmed":true},
+    {"id":"O04","name":"米色西装外套","category":"outer","subtype":"blazer","color":"米色","colorHex":"#e2d3ba","colorFamily":"neutral","warmth":3,"formality":4,"tags":["通勤","约会"],"source":"示例数据","confirmed":true},
+    {"id":"S01","name":"白色运动鞋","category":"shoes","subtype":"sneakers","color":"白","colorHex":"#f7f4ea","colorFamily":"neutral","warmth":2,"formality":2,"tags":["运动","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"S02","name":"黑色乐福鞋","category":"shoes","subtype":"loafers","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":2,"formality":5,"tags":["正式","通勤"],"source":"示例数据","confirmed":true},
+    {"id":"S03","name":"棕色乐福鞋","category":"shoes","subtype":"loafers","color":"棕","colorHex":"#7b5b43","colorFamily":"warm","warmth":2,"formality":4,"tags":["通勤","约会"],"source":"示例数据","confirmed":true},
+    {"id":"S04","name":"黑色短靴","category":"shoes","subtype":"boots","color":"黑","colorHex":"#232323","colorFamily":"neutral","warmth":4,"formality":3,"tags":["秋冬","约会"],"source":"示例数据","confirmed":true},
+    {"id":"S05","name":"灰色运动鞋","category":"shoes","subtype":"sneakers","color":"灰","colorHex":"#9a9a95","colorFamily":"neutral","warmth":2,"formality":1,"tags":["运动","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"A01","name":"米白围巾","category":"accessory","subtype":"scarf","color":"米白","colorHex":"#efe9d9","colorFamily":"neutral","warmth":4,"formality":3,"tags":["秋冬"],"source":"示例数据","confirmed":true},
+    {"id":"A02","name":"蓝色围巾","category":"accessory","subtype":"scarf","color":"蓝","colorHex":"#5b7a99","colorFamily":"cool","warmth":3,"formality":2,"tags":["秋冬","休闲"],"source":"示例数据","confirmed":true},
+    {"id":"A03","name":"红色围巾","category":"accessory","subtype":"scarf","color":"红","colorHex":"#ad5d51","colorFamily":"warm","warmth":3,"formality":3,"tags":["秋冬","约会"],"source":"示例数据","confirmed":true}
+  ]
+}

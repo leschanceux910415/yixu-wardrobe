@@ -1,0 +1,18 @@
+{
+  "version": "synthetic-eval-v1",
+  "provenance": {"kind": "manually_constructed", "description": "独立构造的开发与回归衣橱，不来自真实用户；不可作为真实用户效果证据。"},
+  "items": [
+    {"id":"T01","name":"白色衬衫","category":"top","subtype":"shirt","color":"白","colorHex":"#eeeae0","colorFamily":"neutral","warmth":2,"formality":4,"tags":["通勤"],"source":"人工构造评测","confirmed":true},
+    {"id":"T02","name":"黑色T恤","category":"top","subtype":"tee","color":"黑","colorHex":"#292929","colorFamily":"neutral","warmth":1,"formality":1,"tags":["休闲"],"source":"人工构造评测","confirmed":true},
+    {"id":"T03","name":"蓝色针织衫","category":"top","subtype":"knit","color":"蓝","colorHex":"#6c8091","colorFamily":"cool","warmth":4,"formality":2,"tags":["休闲"],"source":"人工构造评测","confirmed":true},
+    {"id":"B01","name":"黑色长裤","category":"bottom","subtype":"trousers","color":"黑","colorHex":"#292929","colorFamily":"neutral","warmth":3,"formality":4,"tags":["通勤"],"source":"人工构造评测","confirmed":true},
+    {"id":"B02","name":"米色半裙","category":"bottom","subtype":"skirt","color":"米","colorHex":"#c8bba0","colorFamily":"warm","warmth":2,"formality":3,"tags":["约会"],"source":"人工构造评测","confirmed":true},
+    {"id":"B03","name":"蓝色牛仔裤","category":"bottom","subtype":"trousers","color":"蓝","colorHex":"#687e93","colorFamily":"cool","warmth":3,"formality":2,"tags":["休闲"],"source":"人工构造评测","confirmed":true},
+    {"id":"O01","name":"黑色大衣","category":"outer","subtype":"coat","color":"黑","colorHex":"#292929","colorFamily":"neutral","warmth":5,"formality":4,"tags":["冬季"],"source":"人工构造评测","confirmed":true},
+    {"id":"O02","name":"米色西装外套","category":"outer","subtype":"blazer","color":"米","colorHex":"#c8bba0","colorFamily":"warm","warmth":2,"formality":4,"tags":["通勤"],"source":"人工构造评测","confirmed":true},
+    {"id":"S01","name":"黑色乐福鞋","category":"shoes","subtype":"loafers","color":"黑","colorHex":"#292929","colorFamily":"neutral","warmth":2,"formality":4,"tags":["通勤"],"source":"人工构造评测","confirmed":true},
+    {"id":"S02","name":"白色运动鞋","category":"shoes","subtype":"sneakers","color":"白","colorHex":"#eeeae0","colorFamily":"neutral","warmth":1,"formality":1,"tags":["运动"],"source":"人工构造评测","confirmed":true},
+    {"id":"S03","name":"黑色短靴","category":"shoes","subtype":"boots","color":"黑","colorHex":"#292929","colorFamily":"neutral","warmth":4,"formality":3,"tags":["冬季"],"source":"人工构造评测","confirmed":true},
+    {"id":"A01","name":"灰色围巾","category":"accessory","subtype":"scarf","color":"灰","colorHex":"#888888","colorFamily":"neutral","warmth":4,"formality":2,"tags":["冬季"],"source":"人工构造评测","confirmed":true}
+  ]
+}

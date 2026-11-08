@@ -1,0 +1,45 @@
+{
+  "requestedVersion": "hybrid",
+  "denominator": 3,
+  "outcomePassed": 3,
+  "executionErrors": 0,
+  "feasibleLabels": 1,
+  "infeasibleLabels": 2,
+  "falseConflicts": 0,
+  "falseSuccesses": 0,
+  "modelExecuted": 3,
+  "modelPassed": 3,
+  "modelNotExecuted": 0,
+  "fallbackCount": 0,
+  "latencyMedianMs": 1063.38,
+  "latencyP95Ms": 2133.57,
+  "strata": {
+    "missing": {
+      "total": 2,
+      "passed": 2
+    },
+    "soft_preferences": {
+      "total": 1,
+      "passed": 1
+    }
+  },
+  "generatedAt": "2026-11-08T03:18:45.509Z",
+  "datasetKind": "manually_constructed_development_regression",
+  "fixtureVersion": "synthetic-eval-v1",
+  "hashes": {
+    "cases": "904b1f188a9029cf194ab449c71333990aa941688fbb68149ca5f37059160fe2",
+    "fixtures": "4a5a0644287cf81033ae0f9d4b307f97be078e9c897e3062cd3c20157e0ec9f5",
+    "evaluator": "52fc20fbc94e48e43840aa36e2f463fd63f6511b87d907cc37699cecc694544b",
+    "runner": "78759155339fb8c156f5d89480c7304978c1ae066630112160a15cd1f1eb30b5",
+    "core": "c4e4939abddfe9da0b72272852f7d78a13d21628625868078aadcac473b5b8ec",
+    "service": "edc4b17219d4272d320617107b9bd3e488f451d57c07840e3db68b21a6cd3e8c",
+    "llm": "26bf5b08cdc6c8c740083126fdcfafef1020486d174ee1969bf2c488163548a9",
+    "config": "2db7c335baac1edc2c04ed913d296b5c332227f765cdebf5b57f574563fc13ff"
+  },
+  "limitations": [
+    "人工构造开发回归，非独立保留测试",
+    "没有完整相关性标注，不报告Recall/NDCG",
+    "没有真实用户或盲评结果",
+    "降级不计模型完整执行"
+  ]
+}

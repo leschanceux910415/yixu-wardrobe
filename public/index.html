@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="从已有衣物出发，用自然语言找到今天想穿的一套。衣序自然语言衣橱检索与搭配原型。">
+  <title>衣序 · 今天，穿这一套</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#composer">跳到搭配输入</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="衣序首页"><span class="brand-symbol">衣</span><span>衣序<small>A LITTLE ORDER, EVERY DAY</small></span></a>
+    <nav aria-label="主导航"><a class="active" href="/">今日搭配</a><a href="#closet">我的衣橱</a><a href="/case-study.html">项目与评测 <span aria-hidden="true">↗</span></a></nav>
+    <span class="mode-pill" id="mode-badge"><i></i>正在连接</span>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div><p class="eyebrow"><span></span> 从已有的衣服，开始今天</p><h1 id="hero-title">少一点犹豫，<em>多一点合适。</em></h1><p class="hero-description">说说今天的安排和想法，让衣橱里的单品重新遇见。</p></div>
+      <div class="hero-note"><span class="note-line"></span><p>不必拥有更多，<br>也能穿出新的日常。</p><small>YOUR WARDROBE, RECONSIDERED.</small></div>
+    </section>
+
+    <div class="workspace">
+      <div class="main-column">
+        <section class="composer panel" id="composer" aria-labelledby="composer-title">
+          <div class="section-top"><h2 id="composer-title"><span class="section-number">01</span> 今天，想怎么穿？</h2><span class="caption">从一个具体的安排开始</span></div>
+          <form id="query-form">
+            <label class="sr-only" for="query">描述场合、偏好与想保留的衣物</label>
+            <textarea id="query" maxlength="600" rows="3" placeholder="例如：今天去见客户，保留黑色外套，不穿裙子，鞋子优先别和昨天重复。">通勤，不穿裙子。</textarea>
+            <div class="example-row" aria-label="试试这些需求"><span>试试</span><button type="button" class="example" data-query="通勤，不穿裙子。">日常通勤</button><button type="button" class="example" data-query="约会，不要黑色，想轻松一点。">约会</button><button type="button" class="example" data-query="正式见客户，保留黑色西装外套。">见客户</button><button type="button" class="example" data-query="18℃通勤，不穿裙子。">手动指定18℃</button><button type="button" class="example" data-query="同时保留白衬衫和黑色T恤。">看看无解时</button></div>
+            <section class="weather-panel" aria-labelledby="weather-title">
+              <div class="weather-top"><div><span class="tiny-label">DRESS FOR THE DAY</span><h3 id="weather-title">先看看出门的天气</h3></div><label class="weather-toggle"><input type="checkbox" id="weather-enabled" checked><span>参考天气</span></label></div>
+              <div class="weather-controls"><label>城市 <span class="micro-copy">可修改</span><select id="weather-city"><option value="shanghai">上海</option></select></label><label>日期<select id="weather-day"><option value="today">今天</option><option value="tomorrow">明天</option></select></label><label>出行时段<select id="weather-period"><option value="commute">早晚通勤</option><option value="daytime">白天</option><option value="evening">晚上</option><option value="all">全天</option></select></label></div>
+              <div id="weather-card" class="weather-card" aria-live="polite"><p class="weather-state">正在查询所选城市的天气…</p></div>
+              <div class="weather-foot"><p id="weather-override" class="micro-copy">天气只作为穿搭参考；也可以手动填写气温。</p><button id="refresh-weather" class="text-button" type="button">重新查询 ↻</button></div>
+            </section>
+            <div class="composer-bottom"><div class="optional-controls"><label for="scene"><span>场合</span><select id="scene"><option value="">从描述理解</option><option value="commute">日常通勤</option><option value="formal">正式场合</option><option value="casual">周末休闲</option><option value="date">约会</option><option value="sport">运动</option></select></label><label for="temperature"><span>手动气温</span><input id="temperature" type="number" min="-20" max="45" step="1" placeholder="自动"><span>℃</span></label></div><div class="generate-actions"><button id="generate-button" class="button secondary" type="submit"><span id="generate-label">只用规则搭配</span></button><button id="weather-ai-button" class="button primary" type="button"><span id="weather-ai-label">根据天气生成 AI 建议</span><span aria-hidden="true">↗</span></button></div></div>
+          </form>
+          <details class="version-details"><summary>高级 · 对比搭配方式 <span id="version-summary">规则基线</span></summary><fieldset class="version-options"><legend class="sr-only">搭配方式</legend><label><input name="version" type="radio" value="rule" checked><span><strong>规则基线</strong><small>按已确认属性筛选与排序</small></span></label><label><input name="version" type="radio" value="weather"><span><strong>AI 穿搭建议</strong><small>结合天气或手动条件，比较候选</small></span></label><label><input name="version" type="radio" value="hybrid"><span><strong>AI 增强</strong><small>理解需求，比较合格候选</small></span></label><label><input name="version" type="radio" value="direct"><span><strong>全量模型对照</strong><small>直接读取衣橱，结果仍需校验</small></span></label></fieldset><div class="advanced-actions"><p id="model-hint" class="micro-copy">正在检查模型配置。</p><button type="button" id="advanced-generate" class="text-button">按所选方式生成 ↗</button></div></details>
+        </section>
+
+        <section class="results-section" aria-labelledby="results-title">
+          <div class="results-heading"><div><p class="eyebrow">A FEW POSSIBILITIES</p><h2 id="results-title">今天的几种可能</h2></div><span id="result-meta" class="caption">只从你的衣橱里挑选</span></div>
+          <div id="status-message" class="notice" hidden role="status"></div>
+          <details id="trace-panel" class="trace-panel" hidden><summary>这次搭配如何生成 <span id="trace-meta"></span></summary><ol id="trace-steps"></ol></details>
+          <div id="results" class="results-grid" aria-live="polite"><div class="empty-results"><span class="empty-mark">衣</span><h3>一套适合今天的搭配，正在等你。</h3><p>描述一个场合，也可以点上方的示例开始。</p></div></div>
+          <div id="plan-panel" class="plan-panel" hidden><div><span class="tiny-label">TODAY'S PLAN</span><h3 id="plan-title">已保存为今天的计划</h3><p id="plan-description">计划和实际穿着分别记录。</p></div><button type="button" id="confirm-worn" class="button secondary">确认今天已穿 <span aria-hidden="true">✓</span></button></div>
+        </section>
+      </div>
+
+      <aside class="sidebar" aria-label="当前搭配条件与穿着记录">
+        <section class="conditions panel"><div class="section-top"><h2>这次的条件</h2><button type="button" id="clear-conditions" class="text-button">清空</button></div><p class="micro-copy">明确的限制会严格保留；风格与舒适度作为偏好。</p><div id="condition-tags" class="condition-tags"><span class="empty-condition">生成后，这里会显示理解到的条件。</span></div><div id="preference-list" class="preference-list"></div><div id="clarifications" class="clarifications" hidden></div><button type="button" id="clear-unsupported" class="text-button" hidden>移除暂不支持的条件，继续搭配</button><p class="condition-tip">点条件旁的 × 可以移除；也可以直接补充一句话。</p></section>
+        <section class="record-card"><div class="record-top"><span class="tiny-label">A SMALL WARDROBE JOURNAL</span><span aria-hidden="true">↗</span></div><h2>穿过的，<br><em>都记得。</em></h2><div class="record-stats"><div><strong id="worn-days">0</strong><span>个实际穿着日</span></div><div><strong id="planned-count">0</strong><span>个搭配计划</span></div></div><p id="recent-note">确认实际穿过后，才会用于近期重复偏好。</p><button type="button" id="export-records" class="record-export">导出本机试用记录 <span aria-hidden="true">↓</span></button></section>
+        <div class="privacy-note"><span aria-hidden="true">◇</span><p>衣橱和穿着记录保存在当前浏览器。示例衣橱为人工构造；生成时仅将必要衣物属性发送至服务端。</p></div>
+      </aside>
+    </div>
+
+    <section id="closet" class="closet-section" aria-labelledby="closet-title"><div class="closet-heading"><div><p class="eyebrow">LESS, BUT MORE POSSIBILITIES</p><h2 id="closet-title">我的衣橱 <span id="item-count">—</span></h2><p class="micro-copy" id="data-description">示例衣橱 · 属性可编辑，选择始终由你确认</p></div><div class="closet-actions"><button type="button" id="reset-demo" class="text-button">恢复示例</button><button type="button" id="add-item" class="button secondary">＋ 添加单品</button></div></div><div class="closet-toolbar"><div class="filter-tabs" role="group" aria-label="按品类筛选"><button type="button" data-category="all" class="active" aria-pressed="true">全部</button><button type="button" data-category="top" aria-pressed="false">上装</button><button type="button" data-category="bottom" aria-pressed="false">下装</button><button type="button" data-category="outer" aria-pressed="false">外套</button><button type="button" data-category="shoes" aria-pressed="false">鞋履</button><button type="button" data-category="accessory" aria-pressed="false">配饰</button></div><span class="caption">锁定喜欢的一件，或暂时排除某件</span></div><div id="closet-grid" class="closet-grid"><p class="micro-copy">正在打开衣橱…</p></div></section>
+
+    <section class="project-callout"><div><span class="tiny-label">BEHIND THE PRODUCT</span><h2>合适，也需要有据可循。</h2><p>查看需求取舍、规则与模型的分工，以及这份原型如何被评测。</p></div><a href="/case-study.html" class="button secondary">阅读项目与评测 <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="site-footer shell"><a class="brand footer-brand" href="/">衣序 <small>把已有的，穿得更好。</small></a><p>个人项目 · 可交互原型 · 示例数据</p><a href="#composer">回到今天 ↑</a></footer>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="item-dialog"><form id="item-form"><div class="dialog-top"><div><p class="tiny-label">YOUR WARDROBE</p><h2 id="item-dialog-title">添加一件单品</h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="关闭单品表单">×</button></div><p class="micro-copy">首版采用手动确认属性。厚薄与正式度是主观等级，可随时修改。</p><input type="hidden" id="edit-id"><div class="form-grid"><label class="full">单品名称<input id="item-name" required maxlength="40" placeholder="例如：黑色西装外套"></label><label>品类<select id="item-category"><option value="top">上装</option><option value="bottom">下装</option><option value="outer">外套</option><option value="shoes">鞋履</option><option value="accessory">配饰</option></select></label><label>款式<select id="item-subtype"></select></label><label>颜色名称<input id="item-color" required maxlength="12" placeholder="例如：黑色"></label><label>示意颜色<input id="item-hex" type="color" value="#657150"></label><label>色系<select id="item-family"><option value="neutral">中性色</option><option value="warm">暖色</option><option value="cool">冷色</option></select></label><label>厚薄等级<select id="item-warmth"><option value="1">1 · 轻薄</option><option value="2">2 · 偏薄</option><option value="3" selected>3 · 适中</option><option value="4">4 · 偏厚</option><option value="5">5 · 厚实</option></select></label><label>正式程度<select id="item-formality"><option value="1">1 · 运动</option><option value="2">2 · 休闲</option><option value="3" selected>3 · 日常通勤</option><option value="4">4 · 商务</option><option value="5">5 · 正式</option></select></label><label>风格标签<input id="item-tags" maxlength="60" placeholder="简约、宽松"></label></div><div class="dialog-bottom"><button type="button" id="delete-item" class="text-button danger" hidden>删除这件单品</button><button type="submit" class="button primary">保存到衣橱 <span aria-hidden="true">✓</span></button></div></form></dialog>
+</body>
+</html>

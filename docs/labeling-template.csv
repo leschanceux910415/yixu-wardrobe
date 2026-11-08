@@ -1,0 +1,1 @@
+query_id,query_family_id,task_type_retrieval_or_strategy,split,source_kind,source_note,query,corpus_snapshot,item_id,relevance_0_to_3_or_U,hard_requirements,evidence,missing_evidence,unknown_reason,ground_truth_complete,annotator_id,annotation_date,second_label,adjudicated_label,adjudication_note

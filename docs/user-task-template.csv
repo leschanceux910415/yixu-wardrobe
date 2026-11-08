@@ -1,0 +1,1 @@
+session_id,participant_id,date,task_id,task_description,wardrobe_kind,completed_without_help,help_count,condition_understood,correction_count,failure_step,observer_note,user_quote,saved_plan,self_reported_worn,no_feedback,version,followup_action

@@ -1,0 +1,74 @@
+{
+  "requestedVersion": "rule",
+  "denominator": 37,
+  "outcomePassed": 37,
+  "executionErrors": 0,
+  "feasibleLabels": 25,
+  "infeasibleLabels": 11,
+  "falseConflicts": 0,
+  "falseSuccesses": 0,
+  "modelExecuted": 0,
+  "modelPassed": 0,
+  "modelNotExecuted": 0,
+  "fallbackCount": 0,
+  "latencyMedianMs": 0.75,
+  "latencyP95Ms": 2.23,
+  "strata": {
+    "basic": {
+      "total": 6,
+      "passed": 6
+    },
+    "missing_optional": {
+      "total": 1,
+      "passed": 1
+    },
+    "explicit_constraints": {
+      "total": 9,
+      "passed": 9
+    },
+    "recent": {
+      "total": 3,
+      "passed": 3
+    },
+    "conflict": {
+      "total": 7,
+      "passed": 7
+    },
+    "missing": {
+      "total": 4,
+      "passed": 4
+    },
+    "soft_preferences": {
+      "total": 2,
+      "passed": 2
+    },
+    "minimal_wardrobe": {
+      "total": 1,
+      "passed": 1
+    },
+    "multiturn": {
+      "total": 3,
+      "passed": 3
+    },
+    "unsupported": {
+      "total": 1,
+      "passed": 1
+    }
+  },
+  "generatedAt": "2026-11-08T02:49:02.268Z",
+  "datasetKind": "manually_constructed_development_regression",
+  "fixtureVersion": "synthetic-eval-v1",
+  "hashes": {
+    "cases": "904b1f188a9029cf194ab449c71333990aa941688fbb68149ca5f37059160fe2",
+    "fixtures": "4a5a0644287cf81033ae0f9d4b307f97be078e9c897e3062cd3c20157e0ec9f5",
+    "evaluator": "52fc20fbc94e48e43840aa36e2f463fd63f6511b87d907cc37699cecc694544b",
+    "runner": "6c1bbd9983bd9523e0a1edf6a2e5680ec1a578815b1914ffe63c43afa17241a1",
+    "core": "c4e4939abddfe9da0b72272852f7d78a13d21628625868078aadcac473b5b8ec"
+  },
+  "limitations": [
+    "人工构造开发回归，非独立保留测试",
+    "没有完整相关性标注，不报告Recall/NDCG",
+    "没有真实用户或盲评结果",
+    "降级不计模型完整执行"
+  ]
+}
